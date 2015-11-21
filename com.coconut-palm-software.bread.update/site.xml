@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.coconut_palm_software.bread.ui.feature_1.0.0.201010140726.jar" id="com.coconut_palm_software.bread.ui.feature" version="1.0.0.201010140726">
+      <category name="BreadBoad"/>
+   </feature>
+   <category-def name="BreadBoad" label="The Bread Board"/>
+</site>

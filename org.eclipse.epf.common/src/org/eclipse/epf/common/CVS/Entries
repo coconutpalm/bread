@@ -1,0 +1,14 @@
+/AbstractActivator.java/1.3/Thu Feb 14 23:06:29 2008//
+/CommonPlugin.java/1.3/Thu Oct 30 00:53:20 2008//
+/IActivator.java/1.1/Thu Jan 31 07:37:59 2008//
+/IContextProvider.java/1.2/Thu Aug 27 20:36:22 2009//
+/IHTMLFormatter.java/1.2/Thu Aug 27 20:36:22 2009//
+/IHTMLParser.java/1.2/Thu Aug 27 20:36:22 2009//
+/IMessageCallback.java/1.2/Thu Aug 27 20:36:22 2009//
+D/html////
+/package.html/1.1/Tue Jan 15 08:52:55 2008//
+D/plugin////
+D/preferences////
+D/serviceability////
+D/utils////
+D/xml////
