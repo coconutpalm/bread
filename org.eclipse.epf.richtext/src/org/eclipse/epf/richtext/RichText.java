@@ -77,7 +77,7 @@ import org.eclipse.ui.PlatformUI;
  * The default rich text editor uses XHTML as the underlying markup language for
  * the rich text content. It is implemented using a SWT <code>Browser</code>
  * control and DHTML (HTML, CSS and JavaScript).
- * 
+ *
  * @author Kelvin Low
  * @author Jeff Hardy
  * @since 1.0
@@ -200,17 +200,17 @@ public class RichText implements IRichText {
 
 	// The control's find/replace text action
 	protected FindReplaceAction findReplaceAction;
-	
+
 	// The control's IE flag
 	protected boolean isIE = false;
-	
+
 	// A event type indicate control has been initialized
 	public static final int RICH_TEXT_INITIALIZED_WIN32 = 98979695;
 	public static final int RICH_TEXT_INITIALIZED_LINUX = 98979694;
-	
+
 	/**
 	 * Creates a new instance.
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @param style
@@ -222,7 +222,7 @@ public class RichText implements IRichText {
 		debug = RichTextPlugin.getDefault().isDebugging();
 		logger = RichTextPlugin.getDefault().getLogger();
 		findReplaceAction = new FindReplaceAction(this);
-		rteFolder = RichTextPlugin.getDefault().getInstallPath() + "rte/"; //$NON-NLS-1$		
+		rteFolder = RichTextPlugin.getDefault().getInstallPath() + "rte/"; //$NON-NLS-1$
 		rteURL = XMLUtil.escape("file://" + rteFolder); //$NON-NLS-1$
 		setBasePath(basePath);
 
@@ -247,7 +247,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Creates a new instance.
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @param style
@@ -278,7 +278,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Initializes this control.
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @param style
@@ -329,7 +329,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Returns this rich text control.
-	 * 
+	 *
 	 * @return this rich text control
 	 */
 	public Control getControl() {
@@ -338,7 +338,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Sets the layout data.
-	 * 
+	 *
 	 * @param layoutData
 	 *            the layout data to set
 	 */
@@ -350,7 +350,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Returns the layout data.
-	 * 
+	 *
 	 * @return this control's layout data
 	 */
 	public Object getLayoutData() {
@@ -402,7 +402,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Checks whether this control has focus.
-	 * 
+	 *
 	 * @return <code>true</code> if this control has the user-interface focus
 	 */
 	public boolean hasFocus() {
@@ -414,7 +414,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Returns the base path used for resolving text and image links.
-	 * 
+	 *
 	 * @return the base path used for resolving links in this control
 	 */
 	public String getBasePath() {
@@ -424,7 +424,7 @@ public class RichText implements IRichText {
 	/**
 	 * Returns the base URL of the rich text control whose content was last
 	 * copied to the clipboard.
-	 * 
+	 *
 	 * @return the base URL of a rich text control
 	 */
 	public URL getCopyURL() {
@@ -445,7 +445,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Returns the editable state.
-	 * 
+	 *
 	 * @return <code>true</code> if the content is editable
 	 */
 	public boolean getEditable() {
@@ -454,7 +454,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Sets the editable state.
-	 * 
+	 *
 	 * @param editable
 	 *            the editable state
 	 */
@@ -467,7 +467,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Checks whether the content has been modified.
-	 * 
+	 *
 	 * @return <code>true</code> if the content has been modified
 	 */
 	public boolean getModified() {
@@ -476,7 +476,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Sets the modified state.
-	 * 
+	 *
 	 * @param modified
 	 *            the modified state
 	 */
@@ -486,7 +486,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Returns the rich text content.
-	 * 
+	 *
 	 * @return the rich text content formatted in a markup language
 	 */
 	public String getText() {
@@ -495,7 +495,7 @@ public class RichText implements IRichText {
 				executeCommand(RichTextCommand.GET_TEXT);
 				if (currentText != null && currentText.length() > 0) {
 					currentText = currentText.replaceAll(
-							"<P>&nbsp;</P>", "<br/>"); //$NON-NLS-1$ //$NON-NLS-2$			
+							"<P>&nbsp;</P>", "<br/>"); //$NON-NLS-1$ //$NON-NLS-2$
 					currentText = tidyText(currentText);
 					currentText = formatHTML(currentText);
 				} else {
@@ -529,7 +529,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Sets the rich text content.
-	 * 
+	 *
 	 * @param text
 	 *            the rich text content formatted in a markup language
 	 */
@@ -564,7 +564,7 @@ public class RichText implements IRichText {
 			if (initialized) {
 				try {
 					executeCommand(RichTextCommand.SET_TEXT, newText);
-					executeCommand(RichTextCommand.SET_EDITABLE, "" + editable); //$NON-NLS-1$				
+					executeCommand(RichTextCommand.SET_EDITABLE, "" + editable); //$NON-NLS-1$
 				} catch (Exception e) {
 					logger.logError(e);
 				}
@@ -584,7 +584,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Returns the currently selected text.
-	 * 
+	 *
 	 * @return the selected text or <code>""</code> if there is no
 	 *         hasSelection
 	 */
@@ -595,7 +595,7 @@ public class RichText implements IRichText {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.epf.richtext.IRichText#getSelected()
 	 */
 	public RichTextSelection getSelected() {
@@ -604,7 +604,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Returns an application specific property value.
-	 * 
+	 *
 	 * @param key
 	 *            the name of the property
 	 * @return the value of the property or <code>null</code> if it has not
@@ -619,7 +619,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Sets an application specific property name and value.
-	 * 
+	 *
 	 * @param key
 	 *            the name of the property
 	 * @param value
@@ -633,7 +633,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Executes the given JavaScript.
-	 * 
+	 *
 	 * @param script
 	 *            the JavaScript to execute
 	 * @return a status code returned by the executed script
@@ -659,7 +659,7 @@ public class RichText implements IRichText {
 					editor.execute(script);
 				}
 				if (debug) {
-					printDebugMessage("execute", script); //$NON-NLS-1$				
+					printDebugMessage("execute", script); //$NON-NLS-1$
 				}
 			} catch (Exception e) {
 				String msg = "Failed to execute " + script; //$NON-NLS-1$
@@ -676,7 +676,7 @@ public class RichText implements IRichText {
 	/**
 	 * Executes the given rich text command. The supported command strings are
 	 * defined in <code>RichTextCommand<code>.
-	 * 
+	 *
 	 * @param	command		a rich text command string.
 	 * @return	a status code returned by the executed command
 	 */
@@ -698,7 +698,7 @@ public class RichText implements IRichText {
 	/**
 	 * Executes the given rich text command with a single parameter. The
 	 * supported command strings are defined in <code>RichTextCommand<code>.
-	 * 
+	 *
 	 * @param	command		a rich text command string
 	 * @param	param		a parameter for the command or <code>null</code>
 	 * @return	a status code returned by the executed command
@@ -713,7 +713,7 @@ public class RichText implements IRichText {
 	/**
 	 * Executes the given rich text command with an array of parameters. The
 	 * supported command strings are defined in <code>RichTextCommand<code>.
-	 * 
+	 *
 	 * @param	command		a rich text command string
 	 * @param	params		an array of parameters for the command or <code>null</code>
 	 * @return	a status code returned by the executed command
@@ -761,7 +761,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Checks whether this control has been disposed.
-	 * 
+	 *
 	 * @return <code>true</code> if this control is disposed successfully
 	 */
 	public boolean isDisposed() {
@@ -770,7 +770,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Returns the modify listeners attached to this control.
-	 * 
+	 *
 	 * @return an iterator for retrieving the modify listeners
 	 */
 	public Iterator<ModifyListener> getModifyListeners() {
@@ -780,7 +780,7 @@ public class RichText implements IRichText {
 	/**
 	 * Adds a listener to the collection of listeners who will be notified when
 	 * keys are pressed and released within this control.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should be notified
 	 */
@@ -793,7 +793,7 @@ public class RichText implements IRichText {
 	/**
 	 * Removes a listener from the collection of listeners who will be notified
 	 * when keys are pressed and released within this control.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should no longer be notified
 	 */
@@ -806,7 +806,7 @@ public class RichText implements IRichText {
 	/**
 	 * Adds a listener to the collection of listeners who will be notified when
 	 * the content of this control is modified.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should be notified
 	 */
@@ -820,7 +820,7 @@ public class RichText implements IRichText {
 	/**
 	 * Removes a listener from the collection of listeners who will be notified
 	 * when the content of this control is modified.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should no longer be notified
 	 */
@@ -834,7 +834,7 @@ public class RichText implements IRichText {
 	/**
 	 * Adds the listener to the collection of listeners who will be notifed when
 	 * this control is disposed.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should be notified
 	 */
@@ -847,7 +847,7 @@ public class RichText implements IRichText {
 	/**
 	 * Removes a listener from the collection of listeners who will be notified
 	 * when this control is disposed.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should no longer be notified
 	 */
@@ -860,7 +860,7 @@ public class RichText implements IRichText {
 	/**
 	 * Adds a listener to the collection of listeners who will be notified when
 	 * help events are generated for this control.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should be notified
 	 */
@@ -873,7 +873,7 @@ public class RichText implements IRichText {
 	/**
 	 * Removes a listener from the collection of listeners who will be notified
 	 * when help events are generated for this control.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should no longer be notified
 	 */
@@ -886,7 +886,7 @@ public class RichText implements IRichText {
 	/**
 	 * Adds the listener to the collection of listeners who will be notifed when
 	 * an event of the given type occurs within this control.
-	 * 
+	 *
 	 * @param eventType
 	 *            the type of event to listen for
 	 * @param listener
@@ -909,7 +909,7 @@ public class RichText implements IRichText {
 	/**
 	 * Removes the listener from the collection of listeners who will be notifed
 	 * when an event of the given type occurs within this control.
-	 * 
+	 *
 	 * @param eventType
 	 *            the type of event to listen for
 	 * @param listener
@@ -930,7 +930,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Returns the event listeners attached to this control.
-	 * 
+	 *
 	 * @return an iterator for retrieving the event listeners attached to this
 	 *         control
 	 */
@@ -984,8 +984,8 @@ public class RichText implements IRichText {
 									executeCommand(
 											RichTextCommand.SET_EDITABLE,
 											"" + editable); //$NON-NLS-1$
-								}								
-								
+								}
+
 								if (Platform.getOS().equals(Platform.OS_WIN32)) {
 									notifyListeners(RichText.RICH_TEXT_INITIALIZED_WIN32, new Event());
 								}
@@ -1123,7 +1123,7 @@ public class RichText implements IRichText {
 								printDebugMessage(
 										"statusTextListener", "STATUS_REFORMAT_LINKS"); //$NON-NLS-1$ //$NON-NLS-2$
 							}
-							if (Platform.getOS().equals("win32")) { //$NON-NLS-1$ 
+							if (Platform.getOS().equals("win32")) { //$NON-NLS-1$
 								// Workaround the drag and drop issue with DBCS
 								// characters.
 								if (modified) {
@@ -1145,7 +1145,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Generates the HTML source for the editor.
-	 * 
+	 *
 	 * @return the HTML source for the editor
 	 */
 	protected String generateEditorHTML() throws Exception {
@@ -1171,7 +1171,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Fills the context menu with menu items.
-	 * 
+	 *
 	 * @param contextMenu
 	 *            a context menu containing rich text actions
 	 */
@@ -1236,10 +1236,10 @@ public class RichText implements IRichText {
 				printDebugMessage(
 						"init", "editorControl=" + editorControl.getClass().getName()); //$NON-NLS-1$ //$NON-NLS-2$
 			}
-			
+
 			// only IE (win32) has the editorControl != null
 			isIE = true;
-			
+
 			editorControl.addListener(SWT.Activate, new Listener() {
 				public void handleEvent(Event event) {
 					if (debug) {
@@ -1265,7 +1265,7 @@ public class RichText implements IRichText {
 					if (debug) {
 						printDebugMessage("focusInListener"); //$NON-NLS-1$
 					}
-					executeCommand("updateSelection"); //$NON-NLS-1$					
+					executeCommand("updateSelection"); //$NON-NLS-1$
 					notifyListeners(SWT.FocusIn, event);
 				}
 			});
@@ -1279,11 +1279,11 @@ public class RichText implements IRichText {
 									"keyUpListener", "keyCode=" + keyCode //$NON-NLS-1$ //$NON-NLS-2$
 											+ ", stateMask=" + stateMask + ", editable=" + editable); //$NON-NLS-1$ //$NON-NLS-2$
 						}
-						
-						if ( stateMask == SWT.CTRL && event.keyCode == 0x11 ) { //0x11 is for all Control key, such as ctrl-b, ctrl-I, ctrl-c, etc.. 
+
+						if ( stateMask == SWT.CTRL && event.keyCode == 0x11 ) { //0x11 is for all Control key, such as ctrl-b, ctrl-I, ctrl-c, etc..
 							executeCommand("updateSelection");
-						} 
-						
+						}
+
 						if ((stateMask & SWT.CTRL) > 0
 								|| (stateMask & SWT.ALT) > 0
 								|| ((stateMask & SWT.SHIFT) > 0 && keyCode == stateMask)) {
@@ -1308,7 +1308,7 @@ public class RichText implements IRichText {
 						}
 					}
 				});
-			
+
 //			editorControl.addListener(SWT.KeyUp, new Listener() {
 //				public void handleEvent(Event event) {
 //					int keyCode = event.keyCode;
@@ -1404,7 +1404,7 @@ public class RichText implements IRichText {
 		editor.addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent e) {
 				if (debug) {
-					printDebugMessage("disposeListener"); //$NON-NLS-1$						
+					printDebugMessage("disposeListener"); //$NON-NLS-1$
 				}
 				dispose();
 			}
@@ -1416,7 +1416,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Notifies the rich text event listeners.
-	 * 
+	 *
 	 * @param eventType
 	 *            the event type
 	 * @param event
@@ -1437,12 +1437,12 @@ public class RichText implements IRichText {
 				if (listener.getEventType() == eventType) {
 					if (debug) {
 						printDebugMessage(
-								"notifyListeners", "notifying listener, " + listener + ", eventType=" + eventType); //$NON-NLS-1$ //$NON-NLS-2$	//$NON-NLS-3$	
+								"notifyListeners", "notifying listener, " + listener + ", eventType=" + eventType); //$NON-NLS-1$ //$NON-NLS-2$	//$NON-NLS-3$
 					}
 					listener.getListener().handleEvent(event);
 					if (debug) {
 						printDebugMessage(
-								"notifyListeners", "notified listener, " + listener + ", eventType=" + eventType); //$NON-NLS-1$ //$NON-NLS-2$	//$NON-NLS-3$	
+								"notifyListeners", "notified listener, " + listener + ", eventType=" + eventType); //$NON-NLS-1$ //$NON-NLS-2$	//$NON-NLS-3$
 					}
 				}
 			}
@@ -1465,12 +1465,12 @@ public class RichText implements IRichText {
 			ModifyListener listener = i.next();
 			if (debug) {
 				printDebugMessage(
-						"notifyModifyListeners", "notifying listener, " + listener); //$NON-NLS-1$ //$NON-NLS-2$	
+						"notifyModifyListeners", "notifying listener, " + listener); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			listener.modifyText(new ModifyEvent(event));
 			if (debug) {
 				printDebugMessage(
-						"notifyModifyListeners", "notified listener, " + listener); //$NON-NLS-1$ //$NON-NLS-2$	
+						"notifyModifyListeners", "notified listener, " + listener); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 
@@ -1479,7 +1479,7 @@ public class RichText implements IRichText {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.epf.richtext.IRichText#checkModify()
 	 */
 	public void checkModify() {
@@ -1506,7 +1506,7 @@ public class RichText implements IRichText {
 					}
 				}
 				if (debug) {
-					printDebugMessage("checkModify", "modified=" + modified); //$NON-NLS-1$ //$NON-NLS-2$	
+					printDebugMessage("checkModify", "modified=" + modified); //$NON-NLS-1$ //$NON-NLS-2$
 				}
 			}
 		} finally {
@@ -1516,7 +1516,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * This provides an opportunity for a sub class to tidy up the rich text.
-	 * 
+	 *
 	 * @param text
 	 *            rich text encoded in HTML format
 	 */
@@ -1526,7 +1526,7 @@ public class RichText implements IRichText {
 
 	/**
 	 * Formats the text for consumption by the JavaScript/DHTML editor.
-	 * 
+	 *
 	 * @param text
 	 *            rich text encoded in HTML format
 	 */
@@ -1563,7 +1563,7 @@ public class RichText implements IRichText {
 	/**
 	 * Returns the child <code>OleControlSite</code> contained within the
 	 * given <code>Composite</code>.
-	 * 
+	 *
 	 * @param composite
 	 *            a <code>Composite</code> object, presumably a
 	 *            <code>Browser</code>
@@ -1589,7 +1589,7 @@ public class RichText implements IRichText {
 	 */
 	protected void printDebugMessage(String method, String msg, String text) {
 		StringBuffer strBuf = new StringBuffer();
-		strBuf.append("RichText[").append(editor.handle).append(']') //$NON-NLS-1$
+		strBuf.append("RichText") //$NON-NLS-1$
 				.append('.').append(method);
 		if (msg != null && msg.length() > 0) {
 			strBuf.append(": ").append(msg); //$NON-NLS-1$
@@ -1634,7 +1634,7 @@ public class RichText implements IRichText {
 		initialText = text == null ? "" : text; //$NON-NLS-1$
 		modified = false;
 	}
-	
+
 	public boolean hasError() {
 		return htmlFormatter.getLastErrorStr() != null;
 	}

@@ -60,17 +60,17 @@ public class BibleEditor extends EditorPart {
 		browser.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseDoubleClick(MouseEvent e) {
-				mouseDown(e);
+//				mouseDown(e);
 			}
 
 			@Override
 			public void mouseDown(MouseEvent e) {
-				browser.setFocus();
+//				browser.setFocus();
 			}
 
 			@Override
 			public void mouseUp(MouseEvent e) {
-				mouseDown(e);
+//				mouseDown(e);
 			}
 		});
 		browser.addLocationListener(new LocationAdapter() {

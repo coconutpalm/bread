@@ -110,7 +110,7 @@ import org.eclipse.ui.texteditor.IWorkbenchActionDefinitionIds;
  * <code>RichText</code> control for entering the rich text content, and a tab
  * foler that contains a <code>StyleText</code> control for viewing and
  * modifying the XHTML representation of the rich text content.
- * 
+ *
  * @author Kelvin Low
  * @author Jeff Hardy
  * @since 1.0
@@ -152,9 +152,9 @@ public class RichTextEditor implements IRichTextEditor {
 
 	// The underlying HTML text editor.
 	protected TextViewer sourceViewer;
-	
+
 	protected IDocument currentDoc;
-	
+
 	// Drop support
 	protected DropTarget sourceEditDropTarget;
 
@@ -166,31 +166,31 @@ public class RichTextEditor implements IRichTextEditor {
 
 	// The editor's editable flag.
 	protected boolean editable = true;
-	
+
 	private OperationHistoryActionHandler undoAction;
-	
+
 	private OperationHistoryActionHandler redoAction;
-	
+
 	private IEditorSite editorSite;
 
 	/** The actions registered with the editor. */
 	private Map<String, IAction> fActions= new HashMap<String, IAction>(10);
-	
+
 	/** The verify key listener for activation code triggering. */
 	private ActivationCodeTrigger fActivationCodeTrigger= new ActivationCodeTrigger();
-	
+
 	/** The editor's action activation codes. */
 	private List fActivationCodes= new ArrayList(2);
-	
+
 	final IUndoManager undoManager= new TextViewerUndoManager(10);
-	
+
 	/**
 	 * The key binding scopes of this editor.
 	 * @since 2.1
 	 */
 	private String[] fKeyBindingScopes;
 
-	
+
 	protected IDocumentListener sourceEditDocumentListener= new IDocumentListener() {
 		public void documentAboutToBeChanged(DocumentEvent event) {
 		}
@@ -247,7 +247,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Creates a new instance.
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @param style
@@ -259,7 +259,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Creates a new instance.
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @param style
@@ -277,7 +277,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Initializes this editor.
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @param style
@@ -309,7 +309,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Returns the form control.
-	 * 
+	 *
 	 * @return the form control
 	 */
 	public Control getControl() {
@@ -325,7 +325,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Sets the layout data.
-	 * 
+	 *
 	 * @param layoutData
 	 *            the layout data to set
 	 */
@@ -337,7 +337,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Returns the layout data.
-	 * 
+	 *
 	 * @return the editor's layout data
 	 */
 	public Object getLayoutData() {
@@ -369,10 +369,10 @@ public class RichTextEditor implements IRichTextEditor {
 			richText.setBlur();
 		}
 	}
-	
+
 	/**
 	 * Checks whether this editor has focus.
-	 * 
+	 *
 	 * @return <code>true</code> if this editor has the user-interface focus
 	 */
 	public boolean hasFocus() {
@@ -384,7 +384,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Selects the Rich Text or HTML tab.
-	 * 
+	 *
 	 * @param index
 	 *            <code>0</code> for the Rich Text tab, <code>1</code> for
 	 *            the HTML tab.
@@ -397,7 +397,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Returns the base path used for resolving text and image links.
-	 * 
+	 *
 	 * @return the base path used for resolving links specified with <href>,
 	 *         <img>, etc.
 	 */
@@ -408,7 +408,7 @@ public class RichTextEditor implements IRichTextEditor {
 	/**
 	 * Returns the base URL of the rich text control whose content was last
 	 * copied to the clipboard.
-	 * 
+	 *
 	 * @return the base URL of a rich text control
 	 */
 	public URL getCopyURL() {
@@ -430,7 +430,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Returns the editable state.
-	 * 
+	 *
 	 * @return <code>true</code> if the content can be edited
 	 */
 	public boolean getEditable() {
@@ -439,7 +439,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Sets the editable state.
-	 * 
+	 *
 	 * @param editable
 	 *            the editable state
 	 */
@@ -458,7 +458,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Checks whether the content has been modified.
-	 * 
+	 *
 	 * @return <code>true</code> if the content has been modified
 	 */
 	public boolean getModified() {
@@ -470,7 +470,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Sets the modified state.
-	 * 
+	 *
 	 * @param modified
 	 *            the modified state
 	 */
@@ -482,7 +482,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Returns the rich text content.
-	 * 
+	 *
 	 * @return the rich text content formatted in XHTML
 	 */
 	public String getText() {
@@ -499,7 +499,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Sets the rich text content.
-	 * 
+	 *
 	 * @param text
 	 *            the rich text content in XHTML format
 	 */
@@ -519,7 +519,7 @@ public class RichTextEditor implements IRichTextEditor {
 			}
 		}
 	}
-	
+
 	protected void addModifyListeners() {
 		if (currentDoc != null) {
 			currentDoc.addDocumentListener(sourceEditDocumentListener);
@@ -542,7 +542,7 @@ public class RichTextEditor implements IRichTextEditor {
 			notifyModifyListeners();
 		}
 		if (debug) {
-			printDebugMessage("checkModify", "modified=" + sourceModified); //$NON-NLS-1$ //$NON-NLS-2$	
+			printDebugMessage("checkModify", "modified=" + sourceModified); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -573,7 +573,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Returns an application specific property value.
-	 * 
+	 *
 	 * @param key
 	 *            the name of the property
 	 * @return the value of the property or <code>null</code> if it has not
@@ -588,7 +588,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Sets an application specific property name and value.
-	 * 
+	 *
 	 * @param key
 	 *            the name of the property
 	 * @param value
@@ -603,7 +603,7 @@ public class RichTextEditor implements IRichTextEditor {
 	/**
 	 * Executes the given rich text command. The supported command strings are
 	 * defined in <code>RichTextCommand<code>.
-	 * 
+	 *
 	 * @param	command		a rich text command string
 	 * @return	a status code returned by the executed command
 	 */
@@ -617,7 +617,7 @@ public class RichTextEditor implements IRichTextEditor {
 	/**
 	 * Executes the given rich text command with a single parameter. The
 	 * supported command strings are defined in <code>RichTextCommand<code>.
-	 * 
+	 *
 	 * @param	command		a rich text command string
 	 * @param	param		a parameter for the command or <code>null</code>
 	 * @return	a status code returned by the executed command
@@ -632,7 +632,7 @@ public class RichTextEditor implements IRichTextEditor {
 	/**
 	 * Executes the given rich text command with an array of parameters. The
 	 * supported command strings are defined in <code>RichTextCommand<code>.
-	 * 
+	 *
 	 * @param	command		a rich text command string
 	 * @param	params		an array of parameters for the command or <code>null</code>
 	 * @return	a status code returned by the executed command
@@ -668,7 +668,7 @@ public class RichTextEditor implements IRichTextEditor {
 			sourceEditDeactivateListener = null;
 			sourceEditKeyListener = null;
 		}
-		
+
 		if (sourceViewer != null) {
 			sourceViewer= null;
 		}
@@ -690,7 +690,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Checks whether this control has been disposed.
-	 * 
+	 *
 	 * @return <code>true</code> if this control is disposed successfully
 	 */
 	public boolean isDisposed() {
@@ -702,7 +702,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Returns the modify listeners attached to this editor.
-	 * 
+	 *
 	 * @return an iterator for retrieving the modify listeners
 	 */
 	public Iterator<ModifyListener> getModifyListeners() {
@@ -715,7 +715,7 @@ public class RichTextEditor implements IRichTextEditor {
 	/**
 	 * Adds a listener to the collection of listeners who will be notified when
 	 * keys are pressed and released within this editor.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should be notified
 	 */
@@ -728,7 +728,7 @@ public class RichTextEditor implements IRichTextEditor {
 	/**
 	 * Removes a listener from the collection of listeners who will be notified
 	 * when keys are pressed and released within this editor.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should no longer be notified
 	 */
@@ -741,7 +741,7 @@ public class RichTextEditor implements IRichTextEditor {
 	/**
 	 * Adds a listener to the collection of listeners who will be notified when
 	 * the content of this editor is modified.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should be notified
 	 */
@@ -754,7 +754,7 @@ public class RichTextEditor implements IRichTextEditor {
 	/**
 	 * Removes a listener from the collection of listeners who will be notified
 	 * when the content of this editor is modified.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should no longer be notified
 	 */
@@ -767,7 +767,7 @@ public class RichTextEditor implements IRichTextEditor {
 	/**
 	 * Adds the listener to the collection of listeners who will be notifed when
 	 * this editor is disposed.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should be notified
 	 */
@@ -780,7 +780,7 @@ public class RichTextEditor implements IRichTextEditor {
 	/**
 	 * Removes a listener from the collection of listeners who will be notified
 	 * when this editor is disposed.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should no longer be notified
 	 */
@@ -793,7 +793,7 @@ public class RichTextEditor implements IRichTextEditor {
 	/**
 	 * Adds a listener to the collection of listeners who will be notified when
 	 * help events are generated for this editor.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should be notified
 	 */
@@ -806,7 +806,7 @@ public class RichTextEditor implements IRichTextEditor {
 	/**
 	 * Removes a listener from the collection of listeners who will be notified
 	 * when help events are generated for this editor.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener which should no longer be notified
 	 */
@@ -819,7 +819,7 @@ public class RichTextEditor implements IRichTextEditor {
 	/**
 	 * Adds the listener to the collection of listeners who will be notifed when
 	 * an event of the given type occurs within this editor.
-	 * 
+	 *
 	 * @param eventType
 	 *            the type of event to listen for
 	 * @param listener
@@ -834,7 +834,7 @@ public class RichTextEditor implements IRichTextEditor {
 	/**
 	 * Removes the listener from the collection of listeners who will be notifed
 	 * when an event of the given type occurs within this editor.
-	 * 
+	 *
 	 * @param eventType
 	 *            the type of event to listen for
 	 * @param listener
@@ -849,7 +849,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Returns the event listeners attached to this editor.
-	 * 
+	 *
 	 * @return an iterator for retrieving the event listeners attached to this
 	 *         editor
 	 */
@@ -879,7 +879,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Fills the tool bar with action items.
-	 * 
+	 *
 	 * @param toolBar
 	 *            a tool bar contain rich text actions
 	 */
@@ -888,7 +888,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Creates the underlying rich text control.
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @param style
@@ -903,7 +903,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Creates the editor tab folder.
-	 * 
+	 *
 	 * @param parent
 	 *            the parent control
 	 * @param style
@@ -944,14 +944,14 @@ public class RichTextEditor implements IRichTextEditor {
 		contextMenu = new Menu(parent.getShell(), SWT.POP_UP);
 		getSourceEdit().setMenu(contextMenu);
 		// FIXME! This opens up a can of worms, especially with DBCS characters.
-		// See https://bugs.eclipse.org/bugs/show_bug.cgi?id=179432. 
+		// See https://bugs.eclipse.org/bugs/show_bug.cgi?id=179432.
 		//addDropSupportToStyledText();
 		fillContextMenu(contextMenu);
-		
-		
+
+
 		htmlTab = new CTabItem(folder, SWT.NONE);
 		htmlTab.setText(HTML_TAB_NAME);
-		htmlTab.setToolTipText(RichTextResources.htmlTab_toolTipText); 
+		htmlTab.setToolTipText(RichTextResources.htmlTab_toolTipText);
 		htmlTab.setControl(htmlComposite);
 
 		folder.addSelectionListener(new SelectionAdapter() {
@@ -975,16 +975,16 @@ public class RichTextEditor implements IRichTextEditor {
 			}
 		});
 		fillToolBar(toolBar);
-		
+
 		initializeActivationCodeTrigger();
 		createActions();
-		
+
 		folder.setSelection(0);
 
 		return folder;
 	}
 
-	
+
 	private void setDocument(IDocument doc) {
 		if (doc == null) {
 			doc = new Document();
@@ -1008,10 +1008,10 @@ public class RichTextEditor implements IRichTextEditor {
 			redoAction.setContext(getUndoContext());
 		}
 	}
-	
+
 	/**
 	 * Returns the HTML source edit control.
-	 * 
+	 *
 	 * @return a <code>StyleText</code> object.
 	 */
 	public StyledText getSourceEdit() {
@@ -1025,7 +1025,7 @@ public class RichTextEditor implements IRichTextEditor {
 	 * Inserts text at the selection (overwriting the selection).
 	 */
 	public void addHTML(String text) {
-		if (text == null || text.length() == 0) 
+		if (text == null || text.length() == 0)
 			return;
 		if (tabFolder.getSelection() == richTextTab) {
 			executeCommand(RichTextCommand.ADD_HTML, text);
@@ -1043,7 +1043,7 @@ public class RichTextEditor implements IRichTextEditor {
 		}
 	}
 
-	
+
 	/**
 	 * Inserts an image at the selection (overwriting the selection).
 	 */
@@ -1084,7 +1084,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Checks whether the HTML tab is selected.
-	 * 
+	 *
 	 * @return <code>true</code> if the HTML tab is selected.
 	 */
 	public boolean isHTMLTabSelected() {
@@ -1093,7 +1093,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 	/**
 	 * Fills the context menu with menu items.
-	 * 
+	 *
 	 * @param contextMenu
 	 *            a context menu containing rich text actions
 	 */
@@ -1107,7 +1107,7 @@ public class RichTextEditor implements IRichTextEditor {
 			}
 		});
 		final MenuItem copyItem = new MenuItem(contextMenu, SWT.PUSH);
-		copyItem.setText(RichTextResources.copyAction_text); 
+		copyItem.setText(RichTextResources.copyAction_text);
 		copyItem.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				CopyAction action = new CopyAction(RichTextEditor.this);
@@ -1115,14 +1115,14 @@ public class RichTextEditor implements IRichTextEditor {
 			}
 		});
 		final MenuItem pasteItem = new MenuItem(contextMenu, SWT.PUSH);
-		pasteItem.setText(RichTextResources.pasteAction_text); 
+		pasteItem.setText(RichTextResources.pasteAction_text);
 		pasteItem.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				PasteAction action = new PasteAction(RichTextEditor.this);
 				action.execute(RichTextEditor.this);
 			}
 		});
-		
+
 		final MenuItem pastePlainTextItem = new MenuItem(contextMenu, SWT.PUSH);
 		pastePlainTextItem.setText(RichTextResources.pastePlainTextAction_text);
 		pastePlainTextItem.addSelectionListener(new SelectionAdapter() {
@@ -1153,7 +1153,7 @@ public class RichTextEditor implements IRichTextEditor {
 	 * <p>
 	 * This method should be called by the HTML source editor to sync up its
 	 * content with the rich text control.
-	 * 
+	 *
 	 * @param text
 	 *            the rich text content in XHTML format
 	 */
@@ -1169,21 +1169,21 @@ public class RichTextEditor implements IRichTextEditor {
 			}
 		}
 	}
-	
+
 	private void addDropSupportToStyledText() {
 		// this function based heavily on the example at:
 		// http://www.eclipse.org/articles/Article-SWT-DND/DND-in-SWT.html
-		
+
 		 	// Allow data to be copied to the drop target
 			int operations = DND.DROP_MOVE |  DND.DROP_COPY | DND.DROP_DEFAULT;
 			sourceEditDropTarget = new DropTarget(getSourceEdit(), operations);
-		 
+
 			// Receive data in Text or HTML format
 			final TextTransfer textTransfer = TextTransfer.getInstance();
 			final HTMLTransfer htmlTransfer = HTMLTransfer.getInstance();
 			Transfer[] types = new Transfer[] {htmlTransfer, textTransfer};
 			sourceEditDropTarget.setTransfer(types);
-			 
+
 			sourceEditDropTarget.addDropListener(new DropTargetListener() {
 			  public void dragEnter(DropTargetEvent event) {
 			     if (event.detail == DND.DROP_DEFAULT) {
@@ -1221,7 +1221,7 @@ public class RichTextEditor implements IRichTextEditor {
 			    public void dropAccept(DropTargetEvent event) {
 			    }
 			    public void drop(DropTargetEvent event) {
-			        if (textTransfer.isSupportedType(event.currentDataType) || 
+			        if (textTransfer.isSupportedType(event.currentDataType) ||
 			        		htmlTransfer.isSupportedType(event.currentDataType)) {
 			            String text = (String)event.data;
 			            addHTML(text);
@@ -1229,13 +1229,13 @@ public class RichTextEditor implements IRichTextEditor {
 			    }
 			});
 	}
-	
+
 	/**
 	 * Displays the given debug message to the console.
 	 */
 	private void printDebugMessage(String method, String msg, String text) {
 		StringBuffer strBuf = new StringBuffer();
-		strBuf.append("RichTextEditor[").append(richText.getControl().handle).append(']') //$NON-NLS-1$
+		strBuf.append("RichTextEditor") //$NON-NLS-1$
 				.append('.').append(method);
 		if (msg != null && msg.length() > 0) {
 			strBuf.append(": ").append(msg); //$NON-NLS-1$
@@ -1252,7 +1252,7 @@ public class RichTextEditor implements IRichTextEditor {
 	private void printDebugMessage(String method, String msg) {
 		printDebugMessage(method, msg, null);
 	}
-	
+
 	public FindReplaceAction getFindReplaceAction() {
 		return richText.getFindReplaceAction();
 	}
@@ -1264,7 +1264,7 @@ public class RichTextEditor implements IRichTextEditor {
 
 		}
 	}
-	
+
 	public void setInitialText(String text) {
 		if (richText != null) {
 			richText.setInitialText(text);
@@ -1276,8 +1276,8 @@ public class RichTextEditor implements IRichTextEditor {
 		}
 
 	}
-	
-	
+
+
 	/**
 	 * from org.eclipse.ui.texteditor.AbstractTextEditor#getUndoContext()
 	 * Returns this editor's viewer's undo manager undo context.
@@ -1293,7 +1293,7 @@ public class RichTextEditor implements IRichTextEditor {
 		}
 		return null;
 	}
-	
+
 	protected void createActions() {
 		createUndoRedoActions();
 		// select all
@@ -1314,7 +1314,7 @@ public class RichTextEditor implements IRichTextEditor {
 		IUndoContext undoContext= getUndoContext();
 		if (undoContext != null) {
 			// Use actions provided by global undo/redo
-			
+
 			// Create the undo action
 			undoAction= new UndoActionHandler(getEditorSite(), undoContext);
 			PlatformUI.getWorkbench().getHelpSystem().setHelp(undoAction, IAbstractTextEditorHelpContextIds.UNDO_ACTION);
@@ -1328,7 +1328,7 @@ public class RichTextEditor implements IRichTextEditor {
 			registerAction(ITextEditorActionConstants.REDO, redoAction);
 		}
 	}
-	
+
 	private IEditorSite getEditorSite() {
 		return editorSite;
 	}
@@ -1339,7 +1339,7 @@ public class RichTextEditor implements IRichTextEditor {
 	 * ensures that previously installed actions get disposed. It
 	 * also takes care of re-registering the new action with the
 	 * global action handler.
-	 * 
+	 *
 	 * @param actionId	the action id under which to register the action
 	 * @param action	the action to register
 	 * @since 3.1
@@ -1350,13 +1350,13 @@ public class RichTextEditor implements IRichTextEditor {
 			((OperationHistoryActionHandler)oldAction).dispose();
 
 		setAction(actionId, action);
-		
+
 		IActionBars actionBars= getEditorSite().getActionBars();
 		if (actionBars != null)
 			actionBars.setGlobalActionHandler(actionId, action);
 	}
 
-	
+
 	/*
 	 * @see ITextEditor#getAction(String)
 	 */
@@ -1387,7 +1387,7 @@ public class RichTextEditor implements IRichTextEditor {
 			fActivationCodeTrigger.registerActionForKeyActivation(action);
 		}
 	}
-	
+
 	/**
 	 * Initializes the activation code trigger.
 	 *
@@ -1410,7 +1410,7 @@ public class RichTextEditor implements IRichTextEditor {
 		 * @since 2.0
 		 */
 		private IKeyBindingService fKeyBindingService;
-		
+
 		/*
 		 * @see VerifyKeyListener#verifyKey(org.eclipse.swt.events.VerifyEvent)
 		 */
@@ -1515,7 +1515,7 @@ public class RichTextEditor implements IRichTextEditor {
 				fKeyBindingService.setScopes(keyBindingScopes);
 		}
 	}
-	
+
 	/**
 	 * Representation of action activation codes.
 	 */
